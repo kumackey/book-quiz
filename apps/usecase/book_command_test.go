@@ -14,10 +14,10 @@ func Test_Execメソッドは本を作成できる(t *testing.T) {
 	mockBookRepo := new(mockBookRepository)
 	mockBookRepo.On("Persist", mock.Anything, mock.Anything).Return(nil)
 
-	mockUUidGen := new(mockUuidGenerator)
-	mockUUidGen.On("New").Return(id)
+	mockIdGen := new(mockIdGenerator)
+	mockIdGen.On("Generate").Return(id)
 
-	bookCommand := bookCommand{mockBookRepo, mockUUidGen}
+	bookCommand := bookCommand{mockBookRepo, mockIdGen}
 	bookId, err := bookCommand.exec(context.Background())
 
 	assert.NoError(t, err)

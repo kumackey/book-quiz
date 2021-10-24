@@ -1,15 +1,16 @@
 package usecase
 
 import (
+	"github.com/bookuiz-apps/entity"
 	"github.com/stretchr/testify/mock"
 )
 
-type mockUuidGenerator struct {
+type mockIdGenerator struct {
 	mock.Mock
 }
 
-func (m *mockUuidGenerator) New() Uuid {
+func (m *mockIdGenerator) Generate() entity.Id {
 	args := m.Called()
 
-	return Uuid(args.String(0))
+	return entity.Id(args.String(0))
 }

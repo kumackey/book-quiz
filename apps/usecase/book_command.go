@@ -11,11 +11,11 @@ type BookCommand interface {
 
 type bookCommand struct {
 	bookRepo BookRepository
-	uuidGen  UuidGenerator
+	idGen    IdGenerator
 }
 
 func (c *bookCommand) exec(ctx context.Context) (entity.BookId, error) {
-	bookId := entity.BookId(c.uuidGen.New())
+	bookId := entity.BookId(c.idGen.Generate())
 	bookRegistered := entity.NewBookRegistered(bookId)
 
 	err := c.bookRepo.Persist(ctx, bookRegistered)

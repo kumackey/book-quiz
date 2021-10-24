@@ -1,7 +1,7 @@
 package usecase
 
-type UuidGenerator interface {
-	New() Uuid
-}
+import "github.com/bookuiz-apps/entity"
 
-type Uuid string
+type IdGenerator interface {
+	Generate() entity.Id
+}

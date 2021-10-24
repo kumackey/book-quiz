@@ -1,3 +1,3 @@
 package entity
 
-type BookId Id
+type Id string
