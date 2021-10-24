@@ -9,19 +9,26 @@ import (
 )
 
 func Test_Execメソッドは本を作成できる(t *testing.T) {
-	mockBookRepo := new(mockBookRepository)
-	mockBookRepo.On("persist", mock.Anything).Return(nil)
+	id := "123456"
 
-	bookCommand := bookCommand{mockBookRepo}
-	_, err := bookCommand.exec()
+	mockBookRepo := new(mockBookRepository)
+	mockBookRepo.On("Persist", mock.Anything, mock.Anything).Return(nil)
+
+	mockUUidGen := new(mockUuidGenerator)
+	mockUUidGen.On("New").Return(id)
+
+	bookCommand := bookCommand{mockBookRepo, mockUUidGen}
+	bookId, err := bookCommand.exec(context.Background())
+
 	assert.NoError(t, err)
+	assert.Equal(t, id, string(bookId))
 }
 
 type mockBookRepository struct {
 	mock.Mock
 }
 
-func (m *mockBookRepository) persist(ctx context.Context, bookRegistered entity.BookRegistered) error {
+func (m *mockBookRepository) Persist(ctx context.Context, bookRegistered entity.BookRegistered) error {
 	args := m.Called(ctx, bookRegistered)
 
 	return args.Error(0)

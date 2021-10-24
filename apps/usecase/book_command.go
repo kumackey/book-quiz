@@ -11,12 +11,17 @@ type BookCommand interface {
 
 type bookCommand struct {
 	bookRepo BookRepository
+	uuidGen  UuidGenerator
 }
 
-type BookRepository interface {
-	persist(ctx context.Context, bookRegistered entity.BookRegistered) error
-}
+func (c *bookCommand) exec(ctx context.Context) (entity.BookId, error) {
+	bookId := entity.BookId(c.uuidGen.New())
+	bookRegistered := entity.NewBookRegistered(bookId)
 
-func (bc *bookCommand) exec() (entity.BookId, error) {
-	return "", nil
+	err := c.bookRepo.Persist(ctx, bookRegistered)
+	if err != nil {
+		return "", err
+	}
+
+	return bookId, nil
 }
