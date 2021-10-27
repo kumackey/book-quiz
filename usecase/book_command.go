@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"github.com/bookuiz-apps/entity"
+	"github.com/book-quiz/entity"
 )
 
 type BookCommand interface {

@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"github.com/bookuiz-apps/entity"
+	"github.com/book-quiz/entity"
 	"github.com/stretchr/testify/mock"
 )
 

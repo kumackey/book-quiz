@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"github.com/bookuiz-apps/entity"
+	"github.com/book-quiz/entity"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"

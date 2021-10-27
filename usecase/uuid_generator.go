@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/bookuiz-apps/entity"
+import "github.com/book-quiz/entity"
 
 type IdGenerator interface {
 	Generate() entity.Id
